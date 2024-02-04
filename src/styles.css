@@ -3,4 +3,79 @@ body {
   border: 0;
   margin: 0;
   padding: 0;
+  height: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-image: url('images/sunny.jpg'), url(images/cloudy.jpg),
+    url(images/rainy.jpg), url(images/snowy.jpg), url(images/windy.jpg),
+    url(images/foggy.jpg);
+}
+
+#content {
+  display: grid;
+  grid-template-rows: 80px 1fr 50px;
+  height: 100%;
+  transition: 0.5s;
+}
+
+.sunny {
+  background-image: url(images/sunny.jpg);
+  background-attachment: fixed;
+  background-position: 50%;
+  background-size: cover;
+}
+.cloudy {
+  background-image: url(images/cloudy.jpg);
+  background-attachment: fixed;
+  background-position: 50%;
+  background-size: cover;
+}
+.rainy {
+  background-image: url(images/rainy.jpg);
+  background-attachment: fixed;
+  background-position: 50%;
+  background-size: cover;
+}
+.snowy {
+  background-image: url(images/snowy.jpg);
+  background-attachment: fixed;
+  background-position: 50%;
+  background-size: cover;
+}
+.windy {
+  background-image: url(images/windy.jpg);
+  background-attachment: fixed;
+  background-position: 50%;
+  background-size: cover;
+}
+
+.foggy {
+  background-image: url(images/foggy.jpg);
+  background-attachment: fixed;
+  background-position: 50%;
+  background-size: cover;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.github {
+  height: 20px;
+  transition: 0.5s;
+}
+
+.github:hover {
+  transform: scale(1.2);
 }
