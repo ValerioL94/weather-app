@@ -1,3 +1,4 @@
+import dom from './dom';
 const weather = (() => {
   function initPage() {
     const userInput = document.getElementById('location');
@@ -33,8 +34,19 @@ const weather = (() => {
   }
 
   class Weather {
-    constructor(place, condition, temp, humidity, cloud, precip, wind, vis) {
+    constructor(
+      place,
+      time,
+      condition,
+      temp,
+      humidity,
+      cloud,
+      precip,
+      wind,
+      vis
+    ) {
       this.place = place;
+      this.time = time;
       this.condition = condition;
       this.temp = temp;
       this.humidity = humidity;
@@ -44,7 +56,6 @@ const weather = (() => {
       this.vis = vis;
     }
   }
-  let currentWeather;
 
   function createWeather(data) {
     const weather = new Weather(
@@ -53,6 +64,7 @@ const weather = (() => {
         region: data.location.region,
         country: data.location.country,
       },
+      `${data.current.last_updated}`,
       {
         icon: data.current.condition.icon,
         text: data.current.condition.text,
@@ -76,12 +88,12 @@ const weather = (() => {
         USC: `${data.current.vis_miles}miles`,
       }
     );
-    currentWeather = weather;
+    dom.displayWeather(weather);
+    dom.checkWeather(data.current.condition.text);
   }
 
   return {
     initPage,
-    currentWeather,
   };
 })();
 
