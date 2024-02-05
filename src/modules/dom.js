@@ -32,7 +32,7 @@ const dom = (() => {
         pageBg.className = 'sunny';
     }
   }
-  function displayWeather(data) {
+  function displayWeather(data, system) {
     const currentWeather = document.getElementById('currentWeather');
     const location = document.getElementById('currentLocation');
     const time = document.getElementById('time');
@@ -52,11 +52,19 @@ const dom = (() => {
     icon.alt = data.condition.text;
     condition.textContent = data.condition.text;
     cloud.textContent = data.cloud;
-    temp.textContent = data.temp.SI;
     humidity.textContent = data.humidity;
-    precip.textContent = data.precip.SI;
-    wind.textContent = data.wind.SI;
-    vis.textContent = data.vis.SI;
+    if (system === 'SI') {
+      temp.textContent = data.temp.SI;
+      precip.textContent = data.precip.SI;
+      wind.textContent = data.wind.SI;
+      vis.textContent = data.vis.SI;
+    }
+    if (system === 'USC') {
+      temp.textContent = data.temp.USC;
+      precip.textContent = data.precip.USC;
+      wind.textContent = data.wind.USC;
+      vis.textContent = data.vis.USC;
+    }
   }
   return {
     checkWeather,

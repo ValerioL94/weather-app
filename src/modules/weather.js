@@ -1,5 +1,6 @@
 import dom from './dom';
 const weather = (() => {
+  const systemBtn = document.getElementById('metricSystem');
   function initPage() {
     const userInput = document.getElementById('location');
     const searchBtn = document.getElementById('search');
@@ -15,8 +16,22 @@ const weather = (() => {
       getWeather(location);
       userInput.value = '';
     });
+    systemBtn.addEventListener('click', () => {
+      if (systemBtn.className === 'SI') {
+        systemBtn.className = 'USC';
+        systemBtn.title = 'United States Customary System';
+        systemBtn.textContent = 'USC';
+        if (weather === undefined) return;
+        dom.displayWeather(weather, 'USC');
+      } else {
+        systemBtn.className = 'SI';
+        systemBtn.title = 'International System of Units';
+        systemBtn.textContent = 'SI';
+        if (weather === undefined) return;
+        dom.displayWeather(weather, 'SI');
+      }
+    });
   }
-
   async function getWeather(location) {
     try {
       const response = await fetch(
@@ -56,9 +71,9 @@ const weather = (() => {
       this.vis = vis;
     }
   }
-
+  let weather;
   function createWeather(data) {
-    const weather = new Weather(
+    const currentWeather = new Weather(
       {
         name: data.location.name,
         region: data.location.region,
@@ -88,8 +103,10 @@ const weather = (() => {
         USC: `${data.current.vis_miles}miles`,
       }
     );
-    dom.displayWeather(weather);
+    if (systemBtn.className === 'SI') dom.displayWeather(currentWeather, 'SI');
+    else dom.displayWeather(currentWeather, 'USC');
     dom.checkWeather(data.current.condition.text);
+    weather = currentWeather;
   }
 
   return {
