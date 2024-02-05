@@ -14,7 +14,7 @@ body {
   display: grid;
   grid-template-rows: 80px 1fr 50px;
   height: 100%;
-  transition: 0.5s;
+  transition: ease-in-out 1s;
 }
 
 .sunny {
@@ -60,15 +60,59 @@ header {
   align-items: center;
   justify-content: center;
   color: white;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
 }
+
+#formWrapper {
+  width: fit-content;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#location {
+  border-radius: 10px;
+  padding: 0 10px;
+  font-size: 15px;
+  width: clamp(150px, 50%, 200px);
+  box-sizing: border-box;
+}
+#search {
+  border-radius: 10px;
+  cursor: pointer;
+}
+#search:hover {
+  transform: scale(1.1);
+}
+
+#currentWeather {
+  min-height: 300px;
+  width: clamp(300px, 50%, 600px);
+  border: 2px solid;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 10px auto;
+  padding: 15px;
+  box-sizing: border-box;
+}
+/* .hidden {
+  display: none;
+} */
 footer {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   color: white;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .github {
