@@ -12,7 +12,6 @@ const forecast = (() => {
       this.vis = vis;
     }
   }
-
   function createForecast(data) {
     const systemBtn = document.getElementById('systemUM');
     const forecast3Days = [];
@@ -47,11 +46,9 @@ const forecast = (() => {
         }
       );
       forecast3Days.push(forecast);
-      //   if (systemBtn.className === 'SI')
-      //     dom.displayForecast(forecast3Days, 'SI');
-      //   else dom.displayForecast(forecast3Days, 'USC');
     });
-    console.log(forecast3Days);
+    if (systemBtn.className === 'SI') dom.displayForecast(forecast3Days, 'SI');
+    else dom.displayForecast(forecast3Days, 'USC');
   }
   return {
     createForecast,

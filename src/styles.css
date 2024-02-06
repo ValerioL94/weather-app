@@ -185,6 +185,9 @@ form {
 .card.temp {
   align-items: center;
 }
+.tempWrapper {
+  text-align: end;
+}
 footer {
   display: flex;
   align-items: center;

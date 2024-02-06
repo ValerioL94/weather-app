@@ -23,7 +23,6 @@ const weather = (() => {
       this.vis = vis;
     }
   }
-
   function createWeather(data) {
     const systemBtn = document.getElementById('systemUM');
     const currentWeather = new Weather(
@@ -60,7 +59,6 @@ const weather = (() => {
     else dom.displayWeather(currentWeather, 'USC');
     dom.checkWeather(data.current.condition.text);
   }
-
   return {
     createWeather,
   };

@@ -1,6 +1,7 @@
 import weather from './weather';
 import forecast from './forecast';
 const dom = (() => {
+  const forecastWrapper = document.getElementById('forecast');
   function initPage() {
     const systemBtn = document.getElementById('systemUM');
     const userInput = document.getElementById('location');
@@ -14,6 +15,7 @@ const dom = (() => {
     searchBtn.addEventListener('click', () => {
       const location = userInput.value;
       if (location === '') return;
+      forecastWrapper.innerHTML = '';
       getWeather(location);
       userInput.value = '';
     });
@@ -24,14 +26,16 @@ const dom = (() => {
         systemBtn.textContent = 'USC';
         if (weatherData === undefined) return;
         displayWeather(weatherData, 'USC');
-        // displayForecast(forecastData, 'USC');
+        forecastWrapper.innerHTML = '';
+        displayForecast(forecastData, 'USC');
       } else {
         systemBtn.className = 'SI';
         systemBtn.title = 'International System of Units';
         systemBtn.textContent = 'SI';
         if (weatherData === undefined) return;
         displayWeather(weatherData, 'SI');
-        // displayForecast(forecastData, 'SI');
+        forecastWrapper.innerHTML = '';
+        displayForecast(forecastData, 'SI');
       }
     });
   }
@@ -97,7 +101,6 @@ const dom = (() => {
     const precip = document.getElementById('currentPrecip');
     const wind = document.getElementById('currentWind');
     const vis = document.getElementById('currentVis');
-
     currentWeather.className = '';
     location.textContent = `${data.place.name}, ${data.place.region}, ${data.place.country}`;
     time.textContent = data.time;
@@ -120,20 +123,106 @@ const dom = (() => {
     }
     weatherData = data;
   }
-
-  // let forecastData;
-  // function displayForecast(data, system) {
-  // const forecastWrapper = document.getElementById('#forecast');
-  //   data.forEach(el => {
-
-  //   });
-  // }
+  let forecastData;
+  function displayForecast(data, system) {
+    data.forEach((el) => {
+      const day = document.createElement('div');
+      day.className = 'day faded-out';
+      const condWrapper = document.createElement('div');
+      condWrapper.className = 'condWrapper';
+      const time = document.createElement('p');
+      time.className = 'time';
+      time.textContent = el.date;
+      const innerWrapper = document.createElement('div');
+      const icon = document.createElement('img');
+      icon.src = el.condition.icon;
+      icon.alt = el.condition.text;
+      const condText = document.createElement('p');
+      condText.className = 'condition';
+      condText.textContent = el.condition.text;
+      const cardsWrapper = document.createElement('div');
+      cardsWrapper.className = 'cardsWrapper';
+      const card1 = document.createElement('div');
+      card1.className = 'card temp';
+      const card1H3 = document.createElement('h3');
+      card1H3.textContent = 'Temperature';
+      const tempWrapper = document.createElement('div');
+      tempWrapper.className = 'tempWrapper';
+      const avgTemp = document.createElement('p');
+      avgTemp.className = 'avgTemp';
+      const minTemp = document.createElement('p');
+      minTemp.className = 'minTemp';
+      const maxTemp = document.createElement('p');
+      maxTemp.className = 'maxTemp';
+      const card2 = document.createElement('div');
+      card2.className = 'card';
+      const card2H3 = document.createElement('h3');
+      card2H3.textContent = 'Humidity';
+      const humidity = document.createElement('p');
+      humidity.className = 'humidity';
+      humidity.textContent = el.humidity;
+      const card3 = document.createElement('div');
+      card3.className = 'card';
+      const card3H3 = document.createElement('h3');
+      card3H3.textContent = 'Precipitations';
+      const precip = document.createElement('p');
+      precip.className = 'precip';
+      const card4 = document.createElement('div');
+      card4.className = 'card';
+      const card4H3 = document.createElement('h3');
+      card4H3.textContent = 'Snow';
+      const snow = document.createElement('p');
+      snow.className = 'snow';
+      snow.textContent = el.snow;
+      const card5 = document.createElement('div');
+      card5.className = 'card';
+      const card5H3 = document.createElement('h3');
+      card5H3.textContent = 'Wind speed';
+      const wind = document.createElement('p');
+      wind.className = 'wind';
+      const card6 = document.createElement('div');
+      card6.className = 'card';
+      const card6H3 = document.createElement('h3');
+      card6H3.textContent = 'Visibility';
+      const vis = document.createElement('p');
+      vis.className = 'vis';
+      if (system === 'SI') {
+        avgTemp.textContent = el.temp.avgSI;
+        minTemp.textContent = el.temp.minSI;
+        maxTemp.textContent = el.temp.maxSI;
+        precip.textContent = el.precip.SI;
+        wind.textContent = el.wind.SI;
+        vis.textContent = el.wind.SI;
+      }
+      if (system === 'USC') {
+        avgTemp.textContent = el.temp.avgUSC;
+        minTemp.textContent = el.temp.minUSC;
+        maxTemp.textContent = el.temp.maxUSC;
+        precip.textContent = el.precip.USC;
+        wind.textContent = el.wind.USC;
+        vis.textContent = el.wind.USC;
+      }
+      forecastWrapper.appendChild(day);
+      day.append(condWrapper, cardsWrapper);
+      condWrapper.append(time, innerWrapper);
+      innerWrapper.append(icon, condText);
+      cardsWrapper.append(card1, card2, card3, card4, card5, card6);
+      card1.append(card1H3, tempWrapper);
+      tempWrapper.append(avgTemp, minTemp, maxTemp);
+      card2.append(card2H3, humidity);
+      card3.append(card3H3, precip);
+      card4.append(card4H3, snow);
+      card5.append(card5H3, wind);
+      card6.append(card6H3, vis);
+    });
+    forecastData = data;
+  }
   return {
     setBg,
     initPage,
     displayWeather,
     checkWeather,
-    // displayForecast,
+    displayForecast,
   };
 })();
 
