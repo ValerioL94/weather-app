@@ -15,8 +15,6 @@ Background images:
 
 -Snowy: https://unsplash.com/photos/trees-covered-with-snow-during-daytime-dmvpWD6d3DM
 
--Windy: https://pixabay.com/photos/palm-trees-wind-windy-weather-4293013/
-
 -Foggy: https://unsplash.com/photos/abstract-painting-37ZuGYD3JOk
 
 ---
