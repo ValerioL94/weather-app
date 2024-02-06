@@ -1,4 +1,4 @@
-# <a href="https://valeriol94.github.io/weather-app/">Weather app</a> <- Live here
+# <a href="https://valeriol94.github.io/weather-app/">weather app</a> <- Live here
 
 Building a weather forecast site using APIs
 
