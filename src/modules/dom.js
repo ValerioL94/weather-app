@@ -42,7 +42,7 @@ const dom = (() => {
   async function getWeather(location) {
     try {
       const response = await fetch(
-        `http://api.weatherapi.com/v1/forecast.json?key=d0477b1da8904502b5293956240302&q=${location}&days=3`,
+        `https://api.weatherapi.com/v1/forecast.json?key=d0477b1da8904502b5293956240302&q=${location}&days=3`,
         { mode: 'cors' }
       );
       const data = await response.json();
