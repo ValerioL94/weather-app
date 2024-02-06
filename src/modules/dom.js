@@ -1,4 +1,56 @@
+import weather from './weather';
+import forecast from './forecast';
 const dom = (() => {
+  function initPage() {
+    const systemBtn = document.getElementById('systemUM');
+    const userInput = document.getElementById('location');
+    const searchBtn = document.getElementById('search');
+    userInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        searchBtn.click();
+      }
+    });
+    searchBtn.addEventListener('click', () => {
+      const location = userInput.value;
+      if (location === '') return;
+      getWeather(location);
+      userInput.value = '';
+    });
+    systemBtn.addEventListener('click', () => {
+      if (systemBtn.className === 'SI') {
+        systemBtn.className = 'USC';
+        systemBtn.title = 'United States Customary System';
+        systemBtn.textContent = 'USC';
+        if (weatherData === undefined) return;
+        displayWeather(weatherData, 'USC');
+        // displayForecast(forecastData, 'USC');
+      } else {
+        systemBtn.className = 'SI';
+        systemBtn.title = 'International System of Units';
+        systemBtn.textContent = 'SI';
+        if (weatherData === undefined) return;
+        displayWeather(weatherData, 'SI');
+        // displayForecast(forecastData, 'SI');
+      }
+    });
+  }
+  async function getWeather(location) {
+    try {
+      const response = await fetch(
+        `http://api.weatherapi.com/v1/forecast.json?key=d0477b1da8904502b5293956240302&q=${location}&days=3`,
+        { mode: 'cors' }
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error.message);
+      }
+      weather.createWeather(data);
+      forecast.createForecast(data);
+    } catch (error) {
+      alert(error);
+    }
+  }
   const pageBg = document.getElementById('content');
   function checkWeather(data) {
     const iData = data.toLowerCase();
@@ -32,6 +84,7 @@ const dom = (() => {
         pageBg.className = 'sunny';
     }
   }
+  let weatherData;
   function displayWeather(data, system) {
     const currentWeather = document.getElementById('currentWeather');
     const location = document.getElementById('currentLocation');
@@ -65,11 +118,22 @@ const dom = (() => {
       wind.textContent = data.wind.USC;
       vis.textContent = data.vis.USC;
     }
+    weatherData = data;
   }
+
+  // let forecastData;
+  // function displayForecast(data, system) {
+  // const forecastWrapper = document.getElementById('#forecast');
+  //   data.forEach(el => {
+
+  //   });
+  // }
   return {
-    checkWeather,
     setBg,
+    initPage,
     displayWeather,
+    checkWeather,
+    // displayForecast,
   };
 })();
 

@@ -11,7 +11,7 @@ body {
 
 #content {
   display: grid;
-  grid-template-rows: 80px 1fr 50px;
+  grid-template-rows: 50px 1fr 50px;
   min-height: 100%;
   transition: ease-in-out 1s;
 }
@@ -56,6 +56,13 @@ header {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-height: 100%;
+}
 #formWrapper {
   width: fit-content;
   margin: 10px auto;
@@ -86,54 +93,58 @@ form {
   box-sizing: border-box;
 }
 #search:hover,
-#metricSystem:hover {
+#systemUM:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
-#metricSystem {
+#systemUM {
   width: 45px;
   border-radius: 10px;
   border: 1px solid black;
   font-weight: 600;
   color: white;
 }
-#metricSystem.SI {
+#systemUM.SI {
   background-color: blue;
   transition: 0.5s;
 }
-#metricSystem.USC {
+#systemUM.USC {
   background-color: red;
   transition: 0.5s;
 }
 #currentWeather {
-  min-height: 300px;
-  width: clamp(300px, 50%, 900px);
+  width: clamp(300px, 65%, 950px);
   border: 2px solid black;
   border-radius: 10px;
   color: white;
   font-weight: 600;
   background-color: rgba(0, 0, 0, 0.7);
-  margin: 10px auto;
-  padding: 20px;
-  box-sizing: border-box;
+  padding: 10px;
 }
 .hidden {
   display: none;
 }
 
-#locWrapper {
+#currentLocation {
   text-align: center;
+  margin: 0;
 }
-#condWrapper {
+#condWrapper,
+.condWrapper {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  margin-bottom: 10px;
+  justify-content: center;
+  gap: 10px;
 }
-#condWrapper > div {
+#condWrapper > div,
+.condWrapper > div {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+#condWrapper > div > img,
+.condWrapper > div > img {
+  height: 55px;
 }
 .cardsWrapper {
   display: flex;
@@ -151,12 +162,36 @@ form {
   padding: 0px 20px;
   box-sizing: border-box;
 }
+
+#forecast {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12px;
+  width: clamp(300px, 80%, 950px);
+  color: white;
+  font-weight: 600;
+  padding-bottom: 10px;
+  justify-content: center;
+}
+.day {
+  width: 300px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px 0;
+}
+
+.card.temp {
+  align-items: center;
+}
 footer {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   color: white;
+  font-weight: 600;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
